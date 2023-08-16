@@ -1,9 +1,10 @@
 "use client";
 
-import { atom, useAtom } from "jotai";
-import { atomWithStorage } from "jotai/utils";
+import { useAtom } from "jotai";
+import { atomWithStorage, createJSONStorage } from "jotai/utils";
 
-const counter = atomWithStorage("counter", 0);
+const storage = createJSONStorage<number>(() => sessionStorage);
+const counter = atomWithStorage("counter", 0, storage);
 
 export default function Home() {
   const [count, setCount] = useAtom(counter);
